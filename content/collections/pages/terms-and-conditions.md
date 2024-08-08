@@ -4,7 +4,8 @@ blueprint: page
 title: 'Terms And Conditions'
 author: b45ba914-5aec-4d64-b7ad-6b39b076f045
 updated_by: b45ba914-5aec-4d64-b7ad-6b39b076f045
-updated_at: 1723084350
+updated_at: 1723092967
+template: public
 parent: home
 ---
 **Terms And Conditions**

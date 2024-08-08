@@ -16,7 +16,7 @@ class Login extends Component
 
         $credentials = $this->form->all();
         if (Auth::guard('portal')->attempt($credentials)) {
-            return redirect()->intended('dashboard');
+            return redirect()->intended('');
         }
 
         return $this->redirect('login');
