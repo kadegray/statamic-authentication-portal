@@ -11,7 +11,7 @@
 
 <body>
     {{ $slot }}
-    @vite('resources/css/site.js')
+    @vite('resources/js/site.js')
 </body>
 
 </html>
