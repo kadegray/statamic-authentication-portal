@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Statamic\Facades\Entry;
 
 class EnsureStatamicPageAccessIsPermitted
 {
@@ -18,19 +19,13 @@ class EnsureStatamicPageAccessIsPermitted
     {
         $loggedIn = Auth::guard('portal')->check();
         $requestUri = $request->getRequestUri();
-        $publicPaths = $this->getPublicPaths();
-        if (
-            $loggedIn
-            || in_array($requestUri, $publicPaths)
-        ) {
+
+        $entry = Entry::findByUri($requestUri);
+        $entryIsPublic = $entry ? data_get($entry->data(), 'public', false) : false;
+        if ($loggedIn || $entryIsPublic) {
             return $next($request);
         }
 
         return redirect('login');
-    }
-
-    public function getPublicPaths(): array
-    {
-        return config('statamic.public_paths');
     }
 }
