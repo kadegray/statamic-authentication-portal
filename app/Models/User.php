@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use \Illuminate\Database\Eloquent\Concerns\HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +43,12 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'preferences' => 'json',
         ];
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \Statamic\Notifications\PasswordReset($token));
     }
 }
