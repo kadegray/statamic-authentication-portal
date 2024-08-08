@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 Route::get('/logout', function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+    Auth::guard('portal')->logout();
+    // $request->session()->invalidate();
+    // $request->session()->regenerateToken();
     return redirect('login');
 })->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:portal')->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 });

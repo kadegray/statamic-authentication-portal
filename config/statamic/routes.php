@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\EnsureStatamicPageAccessIsPermitted;
+
 return [
 
     /*
@@ -51,6 +53,6 @@ return [
     |
     */
 
-    'middleware' => 'web',
+    'middleware' => ['web', EnsureStatamicPageAccessIsPermitted::class],
 
 ];
