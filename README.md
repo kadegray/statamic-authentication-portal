@@ -17,6 +17,7 @@ npm i
 npm run build
 cp .env.example .env
 php artisan key:generate
+php artisan migrate
 ```
 
 **Create a Customer**
